@@ -10,6 +10,8 @@
     };
   };
 
+  documentation.nixos.enable = false;
+
   environment = {
     gnome.excludePackages = with pkgs; [
       epiphany
