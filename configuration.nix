@@ -13,12 +13,7 @@
   documentation.nixos.enable = false;
 
   environment = {
-    gnome.excludePackages = with pkgs; [
-      epiphany
-      gnome-backgrounds
-      gnome-shell-extensions
-      gnome-tour
-    ];
+    gnome.excludePackages = with pkgs; [ gnome-tour gnome-shell-extensions ];
     systemPackages = [ ];
   };
 
