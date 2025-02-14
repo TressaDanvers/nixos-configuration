@@ -10,7 +10,15 @@
     };
   };
 
-  environment.systemPackages = [ ];
+  environment = {
+    gnome.excludePackages = with pkgs; [
+      epiphany
+      gnome-backgrounds
+      gnome-shell-extensions
+      gnome-tour
+    ];
+    systemPackages = [ ];
+  };
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -20,19 +28,37 @@
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
 
   programs = {
     zsh.enable = true;
   };
 
   services = {
+    gnome = {
+      core-utilities.enable = false;
+    };
     openssh = {
       enable = true;
       settings.PermitRootLogin = "yes";
     };
     pipewire = {
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
       enable = true;
       pulse.enable = true;
+    };
+    xserver = {
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
+      enable = true;
+      excludePackages = with pkgs; [ xterm ];
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
     };
   };
 
